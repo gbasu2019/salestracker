@@ -1,0 +1,112 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Collection</ion-title>
+    <button ion-button menuToggle>
+
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="gotohomepage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <form novalidate (ngSubmit)="submitData()" [formGroup]="signupform">
+
+    <ion-row>
+      <ion-col class="navy-blue">
+        <div text-center class="padding-vertical-8 text-white">{{dealername}}</div>
+      </ion-col>
+    </ion-row>
+    <ion-item>
+      <ion-label floating>Amount</ion-label>
+      <ion-input type="number" [(ngModel)]="data.amount" name="amount" formControlName="amount" [class.error1]="!signupform.controls.amount.valid"></ion-input>
+    </ion-item>
+    <ion-row margin>
+      <ion-col class="navy-blue">
+        <div text-center class=" text-white">Collection Type</div>
+      </ion-col>
+
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div padding class="collection-option">
+          <ion-segment [(ngModel)]="data.collection_type" name="collection_type" formControlName="collection_type" [class.error1]="!signupform.controls.collection_type.valid">
+            <ion-segment-button value="Cash">
+              Cash
+            </ion-segment-button>
+            <ion-segment-button value="Bank">
+              Bank
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+
+        <div [ngSwitch]="data.collection_type">
+
+          <ion-list *ngSwitchDefault>
+            <!-- <ion-list *ngSwitchCase="'Cash'"> -->
+            <ion-item>
+              <ion-label floating>Transaction No.</ion-label>
+              <ion-input type="text" [(ngModel)]="data.transactionID" name="transactionID" formControlName="transactionID"></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-list *ngSwitchCase="'Bank'">
+            <ion-item>
+              <ion-label floating>Transaction Type</ion-label>
+              <ion-select [(ngModel)]="data.cheque" name="cheque" formControlName="cheque">
+                <ion-option value="Cheque">Cheque</ion-option>
+                <ion-option value="NEFT">NEFT</ion-option>
+                <ion-option value="DBT">DBT</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Bank Name</ion-label>
+              <ion-select [(ngModel)]="data.bankid" name="bankid" multiple="false" formControlName="bankid">
+                <ion-option *ngFor="let bank of banklists" [value]="bank.bankid">{{bank.bankname | uppercase}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Cheque No.</ion-label>
+              <ion-input type="text" [(ngModel)]="data.chequeNo" name="chequeNo" formControlName="chequeNo"></ion-input>
+            </ion-item>
+
+
+          </ion-list>
+        </div>
+      </ion-col>
+    </ion-row>
+
+
+    <button ion-button full (click)="takePhoto()" type="button">
+      <ion-icon name="camera"></ion-icon>&nbsp;Take Photo
+    </button>
+    <button ion-button full (click)="selectPhoto()" type="button">
+      <ion-icon name="camera"></ion-icon>&nbsp;Select from gallery
+    </button>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 *ngFor="let photo of photos; let id = index">
+          <ion-card class="block">
+            <ion-icon name="trash" class="deleteIcon" (click)="deletePhoto(id)"></ion-icon>
+            <img [src]="photo" *ngIf="photo" />
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    <ion-row>
+      <ion-col padding>
+        <button ion-button block class="jb-blue text-white" [disabled]="signupform.invalid" type="submit">Submit</button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

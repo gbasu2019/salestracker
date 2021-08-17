@@ -1,0 +1,62 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-buttons end> 
+          <button ion-button icon-only (click)="gotohomepage()">
+              <ion-icon name="home"></ion-icon>
+          </button>
+  </ion-buttons>
+      <ion-title>Stock Details</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content >
+<form >
+<ion-row >
+
+<ion-col  padding-right>
+
+
+  <ion-item>
+    <ion-label floating>Select Category</ion-label>
+    <ion-select [(ngModel)]="data.selectedcategory"  multiple="false" name="selectedcategory" (ionChange)="setSubcategoryValues(data.selectedcategory)">
+        <ion-option *ngFor="let category of categorylists" value="{{ category.categoryid }}">{{category.categoryname}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="subcategorylists">
+    <ion-label floating>Select Category</ion-label>
+    <ion-select [(ngModel)]="data.subcategoryid"  multiple="false" name="selectedsubcategory" (ionChange)="setSubsubcategoryValues(data.subcategoryid)">
+        <ion-option *ngFor="let subcategory of subcategorylists" value="{{ subcategory.categoryid }}">{{subcategory.categoryname}}</ion-option>
+    </ion-select>
+  </ion-item>
+  
+  <ion-item *ngIf="subsubcategorylists">
+    <ion-label floating>Select Category</ion-label>
+    <ion-select [(ngModel)]="data.subsubcategoryid"  multiple="false" name="subsubcategorylists" (ionChange)="setitemcategoryValues(data.subsubcategoryid)">
+        <ion-option *ngFor="let subsubcategory of subsubcategorylists" value="{{ subsubcategory.categoryid }}">{{subsubcategory.categoryname}}</ion-option>
+    </ion-select>
+  </ion-item>
+  
+    <ion-item *ngIf="nextsubcategorylists">
+      <ion-label floating>Select Category</ion-label>
+      <ion-select [(ngModel)]="data.category"  multiple="false" name="category" >
+          <ion-option *ngFor="let subsubcategory of nextsubcategorylists" [value]="subsubcategory">{{subsubcategory.categoryname}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+
+  
+  </ion-col>
+</ion-row >
+<ion-row >
+<ion-col  padding>
+<button ion-button block class="jb-blue" (click)="gotoproductlist(data)">Search Product</button>
+</ion-col>
+</ion-row >
+</form>
+
+</ion-content>

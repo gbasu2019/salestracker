@@ -1,0 +1,135 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="gotohomepage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Order Entry</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col class="navy-blue">
+      <div text-center class="padding-vertical-8 text-white">{{dealername}}</div>
+    </ion-col>
+  </ion-row>
+
+
+
+  <!-- <ion-row>
+                <ion-col> 
+                <ion-item>
+                <ion-label floating>Order No.</ion-label>
+                <ion-input type="text" [(ngModel)]="ordeNumber" [readonly]="true"></ion-input>
+                </ion-item>
+                </ion-col>
+            </ion-row> -->
+
+  <!--  <ion-item>
+                  <ion-label floating>Order Location</ion-label>
+                  <ion-input  type="text"></ion-input>
+              </ion-item>-->
+
+  <form style="position:relative">
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label floating>Delivery Date</ion-label>
+          <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="deliveryDate" name="deliveryDate"></ion-datetime>
+
+        </ion-item>
+
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label floating>Delivery Address</ion-label>
+          <ion-input type="text" [(ngModel)]="deliveryAddress" name="deliveryAddress"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label floating>Payment Terms</ion-label>
+          <ion-input type="text" [(ngModel)]="paymentTerms" name="paymentTerms"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label floating>Delivery By</ion-label>
+          <ion-input type="text" [(ngModel)]="deliveryBy" name="deliveryBy"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label floating>Customer Comments</ion-label>
+          <ion-input type="text" [(ngModel)]="customerComments" name="customerComments"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col padding>
+        <button class="jb-blue text-white" ion-button block (click)="gotoaddProduct(cart)">Add New Product</button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="cart" style=" margin-bottom:80px;">
+      <ion-col>
+        <input type="hidden" id="ordernumber" [(ngModel)]="ordeNumber" name="order" />
+        <ion-list *ngFor="let orderitem of cart;let i = index" no-margin>
+          <ion-item style="border:1px solid #336699 ">
+
+
+            <input type="hidden" id="productid" [(ngModel)]="orderitem.productid" name="productid-{{i}}" />
+            <p ion-text class="text-navy-blue" style="white-space:normal;">
+              <input type="hidden" id="categoryname" [(ngModel)]="orderitem.categoryname" name="categoryname-{{i}}" />{{orderitem.categoryname}}</p>
+            <p ion-text class="text-navy-blue" style="white-space:normal;">
+              <input type="hidden" id="productname" [(ngModel)]="orderitem.productname" name="productname-{{i}}" />{{orderitem.productname}}</p>
+            <p ion-text class="text-navy-blue">
+              <input type="hidden" id="availablequantity" [(ngModel)]="orderitem.availablequantity" name="availablequantity-{{i}}" />Aval Qty : {{orderitem.availablequantity}}</p>
+            <!--<p>{{leaderdatas.type}}</p>-->
+            <p item-end>
+              <button ion-button class="jb-blue" icon-only small (click)="decrement(orderitem)">
+                <ion-icon name="remove-circle"></ion-icon>
+              </button>
+              <span class="addremove-count-box">{{orderitem.quantity}}</span>
+              <button ion-button class="jb-blue" icon-only small (click)="increment(orderitem)">
+                <ion-icon name="add-circle"></ion-icon>
+              </button>
+
+            </p>
+
+          </ion-item>
+        </ion-list>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="this.cart.length!=0" >
+      <ion-col padding>
+        <button ion-button block color="secondary" (click)="dataSaved(cart,ordeNumber)">Place Order</button>
+        <!-- <button ion-button>Edit</button>
+        <button ion-button color="danger" (click)="dataDeleted()">Delete</button>
+        <button ion-button style="background:orange;color:white;" (click)="dataCancel()">Cancel</button> -->
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>

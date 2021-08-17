@@ -1,0 +1,35 @@
+<ion-header>
+        <ion-navbar>
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <ion-buttons end> 
+              <button ion-button icon-only (click)="gotohomepage()">
+                  <ion-icon name="home"></ion-icon>
+              </button>
+      </ion-buttons>
+          <ion-title>Product List</ion-title>
+        </ion-navbar>
+      </ion-header>
+
+<ion-content >
+ <ion-row  class="jb-blue padding-8 text-white">
+	<ion-col>
+		<!-- <span *ngIf="this.brand!=null">{{this.brand}} - </span>  
+		<span *ngIf="this.category!=null">{{this.category}} - </span> 
+    <span>{{this.subcategory}}</span>
+    
+    <span *ngIf="this.text!=null">{{this.text}}</span> -->
+    <span *ngIf="this.categoryName!=null">{{this.categoryName}}</span> 
+    </ion-col>
+    
+</ion-row >
+
+<ion-list >
+  <button ion-item no-padding class="card-custom-bg" *ngFor="let product of itemlist">
+    <span padding-left class="text-jb-blue text-11">{{product.productname}}</span> <span item-end ion-text padding-right color="secondary" style="font-size:12px">({{product.availablequantity}}) Available</span>
+  </button>  
+</ion-list>
+
+
+  </ion-content>

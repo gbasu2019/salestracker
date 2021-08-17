@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="gotohomepage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Add New Product</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form #myForm="ngForm">
+    <!-- <ion-item>
+    <ion-label floating>Brand</ion-label>
+    <ion-select [(ngModel)]="data.selectedBrand"  multiple="false" name="selectedBrand" >
+        <ion-option *ngFor="let brand of brandlists" value="{{ brand.brandid }}" >{{brand.brandname}}</ion-option>
+    </ion-select>
+
+   
+  </ion-item> -->
+    <input type="hidden" [(ngModel)]="this.brandID" name="brandid">
+    <ion-item>
+      <ion-label floating>Select Category</ion-label>
+      <ion-select [(ngModel)]="selectedcategory" multiple="false" name="selectedcategory" (ionChange)="setSubcategoryValues(selectedcategory)">
+        <ion-option *ngFor="let category of categorylists" value="{{ category.categoryid }}">{{category.categoryname}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="subcategorylists">
+      <ion-label floating>Select Category</ion-label>
+      <ion-select [(ngModel)]="data.subcategoryid" multiple="false" name="selectedsubcategory" (ionChange)="setSubsubcategoryValues(data.subcategoryid)">
+        <ion-option *ngFor="let subcategory of subcategorylists" value="{{ subcategory.categoryid }}">{{subcategory.categoryname}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="subsubcategorylists">
+      <ion-label floating>Select Category</ion-label>
+      <ion-select [(ngModel)]="data.subsubcategoryid" multiple="false" name="subsubcategorylists" (ionChange)="setitemcategoryValues(data.subsubcategoryid)">
+        <ion-option *ngFor="let subsubcategory of subsubcategorylists" value="{{ subsubcategory.categoryid }}">{{subsubcategory.categoryname}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="nextsubcategorylists">
+      <ion-label floating>Select Category</ion-label>
+      <ion-select [(ngModel)]="data.categoryid" multiple="false" name="categoryid" (ionChange)="setitemcategoryValues(data.categoryid)">
+        <ion-option *ngFor="let subsubcategory of nextsubcategorylists" value="{{ subsubcategory.categoryid }}">{{subsubcategory.categoryname}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-row class="jb-blue text-white" *ngIf="itemlist">
+      <ion-col col-3 text-left padding-horizontal>Item</ion-col>
+      <ion-col col-5 text-left padding-horizontal></ion-col>
+      <ion-col col-3 text-center padding-horizontal>Qty</ion-col>
+    </ion-row>
+
+
+
+    <ion-row *ngIf="itemlist">
+      <ion-col>
+        <ion-list style="border:1px solid #336699; margin-bottom:80px;">
+
+          <ion-item *ngFor="let productlist of itemlist;let i = index">
+            <input type="hidden" id="subcategoryid" [(ngModel)]="productlist.productid" name="productid-{{i}}" />
+            <p class="text-navy-blue" style="font-size:12px;white-space:normal;">{{productlist.productname}}</p>
+            <p class="text-navy-blue" style="font-size:12px;white-space:normal;">Aval Qty. {{productlist.availablequantity}}</p>
+            <p item-end>
+              <button float-left ion-button class="jb-blue" icon-only small (click)="decrement(productlist,i)">
+                <ion-icon name="remove-circle"></ion-icon>
+              </button>
+              <ion-item float-left text-center class="product-amount-input">
+                <!-- {{productlist.quantity}} -->
+                <ion-input type="number" [(ngModel)]="productlist.quantity" id="quantity-{{i}}" name="quantity-{{i}}" class="quantity" (keyup)="setquatityLimit(productlist,i)"></ion-input>
+              </ion-item>
+              <button float-left ion-button class="jb-blue" icon-only small (click)="increment(productlist,i)">
+                <ion-icon name="add-circle"></ion-icon>
+              </button>
+
+            </p>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <div>
+
+      <ion-row *ngIf="itemlist" class="bottom-fix-section">
+        <ion-col padding>
+          <button button ion-button block class="jb-blue text-white" (click)="formSubmit(itemlist)">Add Product</button>
+        </ion-col>
+      </ion-row>
+
+    </div>
+  </form>
+
+
+</ion-content>

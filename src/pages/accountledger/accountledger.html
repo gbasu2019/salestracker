@@ -1,0 +1,78 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>Account Ledger</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-row>
+    <ion-col class="navy-blue">
+      <div text-center class="padding-vertical-8 text-white">{{dealername}}</div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+
+    <ion-item col-6>
+      <ion-label floating>Start Date</ion-label>
+      <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="startDate"></ion-datetime>
+
+    </ion-item>
+
+    <ion-item col-6>
+      <ion-label floating>End Date</ion-label>
+      <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="endDate"></ion-datetime>
+    </ion-item>
+
+  </ion-row>
+
+  <ion-row>
+    <ion-col padding>
+      <button ion-button block class="jb-blue text-white" (click)="SearchData()">Search</button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="jb-blue text-white">
+    <ion-col>Ledger Details</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-list style="border:1px solid #336699 ">
+
+
+
+        <!--<ion-item *ngIf="leaderdatas.credit != null" class="bg-secondary-light">-->
+
+        <ion-item class="card-custom-bg" *ngFor="let ledgerdatas of ledgerdata;let i = index">
+          <p>
+            <span ion-text color="dark">Date : {{ledgerdatas.LedgerDate}}</span>
+          </p>
+          <p>
+            <span ion-text class="text-jb-blue">Voucher No: {{ledgerdatas.VoucherNo}}</span>
+          </p>
+          <p style="font-size:12px;">Voucher Type : {{ledgerdatas.VoucherType}}</p>
+          <p style="font-size:12px;">Opening Balance : {{ledgerdatas.OpeningBalance}}</p>
+          <p style="font-size:12px;">Closing Balance : {{ledgerdatas.ClosingBalance}}</p>
+
+          <p *ngIf="ledgerdatas.CreditAmount!=0" item-end ion-text color="secondary">{{ledgerdatas.CreditAmount}}(Cr.)</p>
+          <p *ngIf="ledgerdatas.DebitAmount!=0" item-end ion-text color="danger">{{ledgerdatas.DebitAmount}}(Dr.)</p>
+
+
+        </ion-item>
+
+      </ion-list>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

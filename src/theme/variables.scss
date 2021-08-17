@@ -1,0 +1,197 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/theming/
+
+// Font path is used to include ionicons,
+// roboto, and noto sans fonts
+$font-path: "../assets/fonts";
+
+
+// The app direction is used to include
+// rtl styles in your app. For more info, please see:
+// http://ionicframework.com/docs/theming/rtl-support/
+$app-direction: ltr;
+
+
+@import "ionic.globals";
+
+
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/theming/overriding-ionic-variables/
+
+
+
+
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It's highly recommended to change the default colors
+// to match your app's branding. Ionic uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+// The "primary" color is the only required color in the map.
+
+$colors: (
+  primary:    #488aff,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222
+);
+
+
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+
+
+
+
+// App Material Design Variables
+// --------------------------------------------------
+// Material Design only Sass variables can go here
+
+
+
+
+// App Windows Variables
+// --------------------------------------------------
+// Windows only Sass variables can go here
+
+
+
+
+// App Theme
+// --------------------------------------------------
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic's
+// default are overridden.
+
+@import "ionic.theme.default";
+
+
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/ionicons/
+
+@import "ionic.ionicons";
+
+
+// Fonts
+// --------------------------------------------------
+
+@import "roboto";
+@import "noto-sans";
+
+//  SG custom 07/03/18 -----------------
+$jb-blue:#336699;
+$navy-blue:#072756;
+$white:#fff;
+$skyblue:#488aff;
+$bg-secondary-light:#ccffcc;
+$bg-danger-light:#ffcccc;
+$border-radius-10: 10px;
+$top-radius-7:7px 7px 0 0;
+$bottom-radius-7: 0 0 7px 7px;
+
+$padding-8:8px;
+$padding-vertical-8:8px 0 8px 0;
+
+$padding-10: 10px;
+
+// background color-----------
+.jb-blue{ background:$jb-blue !important;}
+.navy-blue{background: $navy-blue !important;}
+.bg-secondary-light{background:$bg-secondary-light !important}
+.bg-danger-light{background:$bg-danger-light !important}
+
+
+
+// text color-----------
+.text-white{ color:$white;}
+.text-navy-blue{ color:$navy-blue !important}
+.text-jb-blue{ color:$jb-blue}
+// text size-----------
+.text-11{font-size:11px}
+.text-50{font-size:50px}
+
+// common --------------
+.h1-heading{color:$white; padding:$padding-10; text-transform: uppercase;}
+.top-radius{border-radius:$top-radius-7}
+.bottom-radius{border-radius:$bottom-radius-7}
+.padding-8{padding:$padding-8}
+.padding-vertical-8{padding:$padding-vertical-8}
+.bottom-fix-section{position:fixed; bottom:0; background:$white; width:100%;}
+ #myFileInput{
+  position: absolute;
+  opacity: 0;
+  top: 40px;
+}
+#myFileInput .input-cover{ position:relative;}
+
+.myFakeUploadButton{
+ /* Whatever you want */
+}
+
+// login ------------
+.login-form-box{ margin: 10px; padding: $padding-10;}
+
+// dashboard ------------------
+.OverallPerformance{ border-bottom:3px solid $navy-blue;}
+.OverallPerformance .button{ font-size:1rem; height:2.6rem}
+.disabled{opacity:0.5;}
+
+//Add Order
+.order-list .order-item{ padding-left:0}
+.order-list ion-label.label{ margin:0;}
+.OrderEntry-input{ padding-left:0!important; min-height:2.4rem!important;}
+.OrderEntry-input .item-inner{padding-right:0!important;}
+.OrderEntry-input .text-input{ margin:6px;}
+.addremove-count-box{border: 0px solid #ccc;
+    display: inline-block;
+    height: 26px;
+    margin: 5px 0;
+    padding: 0;
+    text-align: center;
+	line-height:28px;
+    width: 40px;}
+	
+//Add new products	
+.product-amount-input{width:45px !important; padding:0 !important}
+.product-amount-input .item-inner{padding:0 !important}
+.product-amount-input .item-inner .text-input{margin:8px; text-align:center}
+
+//collection -------
+
+.collection-option .segment-md .segment-button.activated, .collection-option .segment-md .segment-button.segment-activated {
+    background:$skyblue !important;
+    border-color: $navy-blue;
+    color: #fff;
+    opacity: 1;
+}
+//grn -------
+.feedback-box{ width:100px !important; padding:0 !important;}
+.feedback-box .item-inner{padding:0 !important}
+
+.list-checkbox{width:24px !important;  margin:3px !important; padding:0 7px !important; min-height:2.3rem !important}
+.list-checkbox .checkbox { margin:0px !important;}
+
+//product details--------
+
+.card-custom-bg:nth-of-type(odd) {
+    background:#fff; 
+	
+}
+.card-custom-bg:nth-of-type(even) {
+    background:#f1f1f1; 
+}
+.alert-radio-label
+{
+white-space:normal!important;
+}
+
+

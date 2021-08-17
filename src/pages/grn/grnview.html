@@ -1,0 +1,148 @@
+<!--
+  Generated template for the GrnviewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="gotohomepage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>GRN View</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="cards-bg">
+
+  <ion-row>
+    <ion-col class="navy-blue">
+      <div text-center class="padding-vertical-8 text-white">
+        <ion-icon float-right margin-right name="ios-funnel" (click)="ngIfCtrl()"></ion-icon>
+      </div>
+
+    </ion-col>
+  </ion-row>
+  <div *ngIf="hide">
+    <ion-row>
+
+      <ion-item col-6>
+        <ion-label floating>Start Date</ion-label>
+        <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="search.startDate"></ion-datetime>
+
+      </ion-item>
+
+      <ion-item col-6>
+        <ion-label floating>End Date</ion-label>
+        <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="search.endDate"></ion-datetime>
+      </ion-item>
+
+    </ion-row>
+    <ion-item *ngIf="users">
+      <ion-label floating>Select Users</ion-label>
+      <ion-select [(ngModel)]="search.user" multiple="false">
+        <ion-option value=0 selected>All</ion-option>
+        <ion-option *ngFor="let user of users" [value]="user.userid">{{user.fullname | uppercase}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Select Status</ion-label>
+      <ion-select [(ngModel)]="search.grnstatus" multiple="false">
+        <ion-option *ngFor="let status of statuslist,let i = index" [value]="status.PK_StatusID" [selected]="status.StatusName==grnstatusname">{{status.StatusName}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Select Dealer</ion-label>
+      <ion-select [(ngModel)]="search.selectedDealer" multiple="false">
+        <ion-option value=0 selected>All</ion-option>
+        <ion-option *ngFor="let dealer of dealerlist" [value]="dealer.dealerid">{{dealer.dealername | uppercase}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Invoice No.</ion-label>
+      <ion-input type="text" [(ngModel)]="search.invoicenumber"></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col padding>
+        <button ion-button block class="jb-blue text-white" (click)="SearchData()">Search</button>
+      </ion-col>
+      <ion-col padding>
+        <button ion-button block class="jb-blue text-white" (click)="ResetData()">Reset</button>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-row margin-top class="jb-blue text-white">
+    <ion-col>GRN History</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-list style="border:1px solid #336699 ">
+
+        <ion-item class="card-custom-bg" *ngFor="let grn of data" (click)="toggleDetails(grn)">
+          <ion-icon color="primary" item-right [name]="grn.icon"></ion-icon>
+          <p>
+            <span ion-text class="text-jb-blue" style="font-size:12px;">GRN Date : {{grn.grnDate | date}}</span>
+          </p>
+          <p>
+            <span ion-text class="text-jb-blue">Dealer Name : {{grn.DealerName}}</span>
+          </p>
+          <p>
+            <span ion-text class="text-jb-blue">GRN number : {{grn.grnNo}}</span>
+          </p>
+          <p>
+            <span ion-text color="dark" style="font-size:12px;">Qty.: {{grn.Quantity}}</span>
+            <span>&nbsp;</span>
+            <span ion-text color="dark" style="font-size:12px;">Status : {{grn.grnStatus}}</span>
+
+          </p>
+          <!-- <p>
+            <span ion-text color="dark" style="font-size:12px;">Total Quantity : {{grn.Quantity}}</span>
+          </p> 
+          <p>
+            <span ion-text color="dark" style="font-size:12px;">Status : {{grn.grnStatus}}</span>
+          </p>-->
+          <p>
+            <span ion-text class="text-jb-blue" *ngIf="usergrpId==1">User Name : {{grn.FullName}}</span>
+          </p>
+          <div *ngIf="grn.showDetails">
+            <ion-item *ngFor="let products of grn.product">
+              <p style="white-space: normal;">
+                <span ion-text class="text-jb-blue">Category Name : {{products.CategoryName}}</span>
+              </p>
+              <p style="white-space: normal;">
+                <span ion-text class="text-jb-blue">Product Name : {{products.ProductName}}</span>
+              </p>
+
+              <p style="white-space: normal;">
+                <span ion-text class="text-jb-blue">Quantity : {{products.grnQTY}}</span>
+              </p>
+              <p style="white-space: normal;">
+                <span ion-text class="text-jb-blue" *ngIf="products.Defect==1">Defect : Yes</span>
+              </p>
+              <p style="white-space: normal;">
+                <span ion-text class="text-jb-blue" *ngIf="products.Defect==0">Defect : No</span>
+              </p>
+              <p style="white-space: normal;">
+                <span ion-text class="text-jb-blue" *ngIf="products.Feedback!=''">Feedback : {{products.Feedback}}</span>
+              </p>
+
+            </ion-item>
+
+          </div>
+        </ion-item>
+
+      </ion-list>
+    </ion-col>
+  </ion-row>
+
+
+</ion-content>

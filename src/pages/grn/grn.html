@@ -1,0 +1,84 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="gotohomepage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>GRN</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-row class="navy-blue text-white">
+    <ion-col text-center padding>{{dealername}}</ion-col>
+  </ion-row>
+
+
+  <ion-item>
+    <ion-label floating>Invoice No.</ion-label>
+    <ion-input type="text" [(ngModel)]="grn.inVoiceNumber"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Invoice Date.</ion-label>
+    <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="grn.invoicedate"></ion-datetime>
+  </ion-item>
+
+  <ion-row>
+    <ion-col padding>
+      <button class="jb-blue text-white" ion-button block (click)="gotorejectlispage(cart)" type="button">Add Product For Return</button>
+    </ion-col>
+  </ion-row>
+  <form (ngSubmit)="f.form.valid && dataSaved(cart)">
+
+    <ion-row class="jb-blue text-white" *ngIf="this.cart.length!=0">
+      <ion-col text-center>GRN Item</ion-col>
+    </ion-row>
+    <ion-row style=" margin-bottom:80px">
+      <ion-col>
+        <ion-list *ngFor="let d of cart">
+          <ion-item *ngIf="d.quantity!=0" style="border:1px solid #336699">
+            <ion-icon color="primary" item-right [name]="d.icon" *ngIf="d.defect==true" (click)="toggleDetails(d)"></ion-icon>
+            <input type="hidden" id="productid" [(ngModel)]="d.productid" name="productid-{{i}}" />
+            <p class="text-navy-blue" style="white-space:normal;"> {{d.categoryname}}</p>
+            <p class="text-navy-blue" style="white-space:normal;"> {{d.productname}}</p>
+            <p *ngIf="d.defect==true" ion-text color="danger" style="font-size:12px">
+              <input type="hidden" id="quantity" [(ngModel)]="d.quantity" name="quantity-{{i}}" />{{d.quantity}} Defect</p>
+            <p *ngIf="d.defect==false" ion-text color="secondary" style="font-size:12px">
+              <input type="hidden" id="quantity" [(ngModel)]="d.quantity" name="quantity-{{i}}" />{{d.quantity}} Fresh</p>
+            <div *ngIf="f.submitted && d.defect==true" style="color:red;">Feedback is required for defect product</div>
+            <div *ngIf="d.showDetails">
+              <ion-item *ngIf="d.defect==true">
+                <ion-textarea [(ngModel)]="d.feedback" name="feedback" #feedback="ngModel" placeholder="Product Feedback" lineHeight="22"
+                  required></ion-textarea>
+
+              </ion-item>
+              <!-- {{d.details}}-->
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row class="bottom-fix-section" *ngIf="this.cart.length!=0">
+      <ion-col text-center>
+        <button block ion-button class="jb-blue text-white">Save</button>
+      </ion-col>
+      <ion-col text-center>
+        <button block ion-button color="danger" (click)="dataCancel()" type="button">Cancel</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>

@@ -1,0 +1,111 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="gotohomepage()">
+                <ion-icon name="home"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-title>Visit List</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="cards-bg">
+    <ion-row>
+        <ion-col class="navy-blue">
+            <div text-center class="padding-vertical-8 text-white">
+                <ion-icon float-right margin-right name="ios-funnel" (click)="ngIfCtrl()"></ion-icon>
+            </div>
+        </ion-col>
+    </ion-row>
+    <ion-card-content>
+        <canvas #barCanvas (click)="goToSlide()"></canvas>
+    </ion-card-content>
+    <div *ngIf="hide">
+
+        <ion-row>
+            <ion-item>
+                <ion-label floating>Select Dealer</ion-label>
+                <ion-select [(ngModel)]="search.selectedDealer" multiple="false">
+                    <ion-option value=0 selected>All</ion-option>
+                    <ion-option *ngFor="let dealer of dealerlist" [value]="dealer.dealerid">{{dealer.dealername | uppercase}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item col-6>
+                <ion-label floating>Start Date</ion-label>
+                <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="search.startDate"></ion-datetime>
+
+            </ion-item>
+
+            <ion-item col-6>
+                <ion-label floating>End Date</ion-label>
+                <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="search.endDate"></ion-datetime>
+            </ion-item>
+
+        </ion-row>
+        <ion-item *ngIf="users">
+            <ion-label floating>Select Users</ion-label>
+            <ion-select [(ngModel)]="search.user" multiple="false">
+                <ion-option value=0 selected>All</ion-option>
+                <ion-option *ngFor="let user of users" [value]="user.userid">{{user.fullname | uppercase}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-row>
+            <ion-col padding>
+                <button ion-button block class="jb-blue text-white" (click)="SearchData()">Search</button>
+
+            </ion-col>
+            <ion-col padding>
+                <button ion-button block class="jb-blue text-white" (click)="ResetData()">Reset</button>
+            </ion-col>
+        </ion-row>
+    </div>
+    <ion-row class="jb-blue text-white">
+        <ion-col>Visit List</ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-list style="border:1px solid #336699 ">
+                <ion-item class="card-custom-bg" *ngFor="let visit of data">
+                    <div style="float:right;" *ngIf="visit.VisitImage!=''">
+                        <ion-thumbnail item-end style="min-width:50px;min-height:50px;">
+                            <img style="width:50px;height:50px;" [src]="visit.VisitImage" imageViewer />
+                        </ion-thumbnail>
+                    </div>
+
+                    <div ion-text color="dark" *ngIf="usergrpId==1" style="font-size: 14px;white-space: normal;">
+                        <b>Visiter's name : </b>{{visit.FullName}}
+                        <br>
+                    </div>
+
+                    <div ion-text color="dark" style="font-size: 14px;white-space: normal;">
+                        <b>Visit Date : </b>{{visit.VisitDate | date: 'medium'}}
+                        <br>
+                    </div>
+                    <div ion-text color="dark" style="font-size: 14px;white-space: normal;">
+                        <b>Dealer Name : </b>{{visit.DealerName}}
+                        <br>
+                    </div>
+
+                    <div ion-text color="dark" style="font-size: 14px;white-space: normal;">
+                        <b>Location : </b>{{visit.Location}}</div>
+
+                    <div ion-text color="dark" style="font-size: 14px;white-space: normal;">
+                        <b>Visit Status : </b>{{visit.VisitStatus}}</div>
+                    <ion-row *ngIf="usergrpId==1">
+                        <ion-col padding *ngIf="visit.VisitStatus!='Approved'">
+                            <button block ion-button class="jb-blue" (click)="Approval(visit)">Approve</button>
+                        </ion-col>
+                        <ion-col padding *ngIf="visit.VisitStatus!='Reject'">
+                            <button block ion-button color="danger" (click)="Reject(visit)">Reject</button>
+                        </ion-col>
+                    </ion-row>
+
+                </ion-item>
+            </ion-list>
+        </ion-col>
+    </ion-row>
+
+</ion-content>

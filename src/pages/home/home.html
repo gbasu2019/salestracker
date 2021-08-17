@@ -1,0 +1,140 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="logOut()">
+                <ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Home</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-row>
+        <ion-col class="navy-blue">
+            <div float-left text-left class="padding-vertical-8 text-white">Overall Performance of {{this.username}}</div>
+            <div float-right>
+
+                <button ion-button icon-left small color="light" outline (click)="getDealerList()">
+                    <ion-icon name="sync"></ion-icon> sync</button>
+            </div>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="OverallPerformance">
+        <ion-col col-5 text-left>
+            <button ion-button Small full color="light">Total Order</button>
+            <button ion-button Small full>Dealer Visit</button>
+            <button ion-button Small full>Total GRN</button>
+            <button ion-button Small full>Today's Collection </button>
+            <button ion-button Small full>Monthly Collection </button>
+        </ion-col>
+
+        <ion-col col-7>
+            <div col-12 text-center>Total Order Count</div>
+            <canvas #pieCanvas></canvas>
+        </ion-col>
+
+        <!-- <ion-col col-7>
+
+
+            <div id="container" style="min-width: 310px; margin: 0 auto"></div>
+
+
+        </ion-col> -->
+    </ion-row>
+    <ion-row margin-bottom>
+        <ion-item>
+            <ion-input (keyup)='onDealerFilter(home.dealer_filter)' type="text" placeholder="" [(ngModel)]="home.dealer_filter" name="dealer_filter"
+                #dealer_filter="ngModel"></ion-input>
+            <ion-label floating>Select Dealer</ion-label>
+
+            <ion-select [(ngModel)]="home.selectedDealer" multiple="false" (ionChange)='valuechange(home.selectedDealer)'>
+                <ng-container *ngFor="let dealer of dealerlist">
+                    <ion-option [selected]="dealer.dealername == dealername" [value]="dealer">{{dealer.dealername | uppercase}}</ion-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+    </ion-row>
+
+    <div *ngIf="divShow==true">
+        <ion-row>
+            <ion-col text-center style=" border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                <img src="./assets/icon/create-order.png" (click)="navigateToPage('createorder')">
+            </ion-col>
+            <ion-col text-center style="border-left:1px solid #ccc; border-bottom:1px solid #ccc; border-top:1px solid #ccc; ">
+                <img src="./assets/icon/visit.png" (click)="navigateToPage('visitentry')">
+            </ion-col>
+            <ion-col text-center style="border-left:1px solid #ccc; border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                <img src="./assets/icon/GRN.png" (click)="navigateToPage('grnentry')">
+            </ion-col>
+            <ion-col text-center style="border-left:1px solid #ccc; border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                <img src="./assets/icon/colection.png" (click)="navigateToPage('collection')">
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col text-center style="border-right:1px solid #ccc; border-bottom:1px solid #ccc">
+                <img src="./assets/icon/dealer-ledger.png" (click)="navigateToPage('dealerledger')">
+            </ion-col>
+            <ion-col text-center style="border-right:1px solid #ccc; border-bottom:1px solid #ccc">
+                <img src="./assets/icon/stock-details.png" (click)="navigateToPage('stockdetails')">
+            </ion-col>
+            <ion-col text-center style="border-right:1px solid #ccc;border-bottom:1px solid #ccc">
+                <img src="./assets/icon/order-list.png" (click)="navigateToPage('orderlist')">
+            </ion-col>
+            <ion-col text-center style="border-bottom:1px solid #ccc">
+                <img src="./assets/icon/reports.png" (click)="navigateToPage('report')">
+            </ion-col>
+        </ion-row>
+
+    </div>
+
+    <div *ngIf="divShow==false">
+        <ion-row>
+            <ion-col text-center style=" border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                <img class="disabled" src="./assets/icon/create-order.png">
+            </ion-col>
+            <ion-col text-center style="border-left:1px solid #ccc; border-bottom:1px solid #ccc; border-top:1px solid #ccc; ">
+                <img class="disabled" src="./assets/icon/visit.png">
+            </ion-col>
+            <ion-col text-center style="border-left:1px solid #ccc; border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                <img class="disabled" src="./assets/icon/GRN.png">
+            </ion-col>
+            <ion-col text-center style="border-left:1px solid #ccc; border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                <img class="disabled" src="./assets/icon/colection.png">
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col text-center style="border-right:1px solid #ccc; border-bottom:1px solid #ccc">
+                <img class="disabled" src="./assets/icon/dealer-ledger.png">
+            </ion-col>
+            <ion-col text-center style="border-right:1px solid #ccc; border-bottom:1px solid #ccc">
+                <img class="disabled" src="./assets/icon/stock-details.png">
+            </ion-col>
+            <ion-col text-center style="border-right:1px solid #ccc;border-bottom:1px solid #ccc">
+                <img class="disabled" src="./assets/icon/order-list.png">
+            </ion-col>
+            <ion-col text-center style="border-bottom:1px solid #ccc">
+                <img src="./assets/icon/reports.png" (click)="navigateToPage('report')">
+            </ion-col>
+        </ion-row>
+
+    </div>
+</ion-content>
+
+<ion-footer class="navy-blue padding-8">
+
+    <span style="text-align:left; color: #fff; font-size:14px;">JBApp </span>
+    <span style=" float:right; text-align:right; color: #fff; font-size:14px; ">
+        Ver.{{CurrentVersion}}
+        <a href="{{MobileAppPath}}" target="_blank" title="new version available" style="color:white;text-decoration:none;">
+            <button name="update" class="jb-blue text-white">Update</button>
+        </a>
+    </span>
+
+</ion-footer>

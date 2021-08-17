@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="gotohomepage()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+
+    </ion-buttons>
+    <ion-title>Visit Entry</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-row class="navy-blue text-white">
+    <ion-col text-center padding>{{dealername}}</ion-col>
+  </ion-row>
+  <button ion-button full (click)="OpenCamera()" type="button">
+    <ion-icon name="camera"></ion-icon>&nbsp;Take Photo
+  </button>
+
+  <ion-grid>
+    <ion-card *ngIf="base64Image">
+      <img [src]="base64Image" />
+    </ion-card>
+  </ion-grid>
+  <ion-row>
+    <ion-col padding>
+      <button class="jb-blue text-white" ion-button block (click)="getGeo()">Visit</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

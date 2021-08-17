@@ -1,0 +1,35 @@
+<ion-content class="navy-blue">
+	<ion-row>
+		<ion-col>
+			<h1 class="h1-heading" text-center>
+				<img src="./assets/imgs/logo.png" alt="JB APP" width="130" />
+				<br/> Jalan Brothers</h1>
+		</ion-col>
+	</ion-row>
+	<ion-row>
+		<ion-col col-12>
+
+			<form class="login-form-box">
+				<ion-list>
+					<ion-item class="top-radius">
+						<ion-label floating>Username</ion-label>
+						<ion-input type="text" [(ngModel)]="data.username" name="username" required></ion-input>
+					</ion-item>
+
+					<ion-item class="bottom-radius">
+						<ion-label floating>Password</ion-label>
+						<ion-input type="password" [(ngModel)]="data.password" name="password" required></ion-input>
+					</ion-item>
+				</ion-list>
+
+				<div>
+					<button class="jb-blue text-white" ion-button block (click)="signIn()">Sign In</button>
+				</div>
+				<a href="javascript:void(0)" (click)="forgotPassword()">Forgot Password ?</a>
+			</form>
+
+		</ion-col>
+	</ion-row>
+
+
+</ion-content>

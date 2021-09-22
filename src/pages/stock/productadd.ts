@@ -12,7 +12,7 @@ import { environment } from '../../app/environments/environments';
 export class ProductAddPage {
 
   /** variable declaration */
-
+  searchproduct: any;
   productdata = [];
   productlists: any;
   brandlists: any[];

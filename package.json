@@ -71,10 +71,13 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-geolocation": {
-        "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
+        "GEOLOCATION_USAGE_DESCRIPTION": "To locate you",
+        "GPS_REQUIRED": "true"
       },
       "cordova-plugin-nativegeocoder": {},
-      "cordova-plugin-camera": {},
+      "cordova-plugin-camera": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
       "cordova-plugin-file": {},
       "cordova-plugin-app-version": {}
     },

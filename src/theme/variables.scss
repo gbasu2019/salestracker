@@ -125,7 +125,7 @@ $padding-10: 10px;
 .bottom-radius{border-radius:$bottom-radius-7}
 .padding-8{padding:$padding-8}
 .padding-vertical-8{padding:$padding-vertical-8}
-.bottom-fix-section{position:fixed; bottom:0; background:$white; width:100%;}
+.bottom-fix-section{/*position:fixed;*/ bottom:0; background:$white; width:100%;}
  #myFileInput{
   position: absolute;
   opacity: 0;
@@ -192,6 +192,10 @@ $padding-10: 10px;
 .alert-radio-label
 {
 white-space:normal!important;
+}
+.searchproduct{
+    border: 1px solid $jb-blue;
+
 }
 
 

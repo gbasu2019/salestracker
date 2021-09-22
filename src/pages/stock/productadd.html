@@ -22,6 +22,10 @@
 
    
   </ion-item> -->
+
+
+
+
     <input type="hidden" [(ngModel)]="this.brandID" name="brandid">
     <ion-item>
       <ion-label floating>Select Category</ion-label>
@@ -50,6 +54,16 @@
         <ion-option *ngFor="let subsubcategory of nextsubcategorylists" value="{{ subsubcategory.categoryid }}">{{subsubcategory.categoryname}}</ion-option>
       </ion-select>
     </ion-item>
+
+    <ion-row *ngIf="itemlist" class="bottom-fix-section">
+      <ion-col padding>
+        <ion-input type="text" placeholder="Search" class="searchproduct" [(ngModel)]="searchproduct" name="searchproduct" (onChange)="search_Product()"></ion-input>
+      </ion-col>
+      <ion-col padding>
+        <button button ion-button block class="jb-blue text-white" (click)="formSubmit(itemlist)">Add Product</button>
+      </ion-col>
+    </ion-row>
+  
 
     <ion-row class="jb-blue text-white" *ngIf="itemlist">
       <ion-col col-3 text-left padding-horizontal>Item</ion-col>
@@ -86,11 +100,11 @@
     </ion-row>
     <div>
 
-      <ion-row *ngIf="itemlist" class="bottom-fix-section">
+      <!-- <ion-row *ngIf="itemlist" class="bottom-fix-section">
         <ion-col padding>
           <button button ion-button block class="jb-blue text-white" (click)="formSubmit(itemlist)">Add Product</button>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
 
     </div>
   </form>

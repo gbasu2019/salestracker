@@ -101,12 +101,41 @@ export class VisitEntryPage {
 
 
         }, error => {
+          alert(error)
           console.log(error);
 
         });
 
     }).catch((error) => {
       alert('Error getting location' + JSON.stringify(error));
+
+      this.longitude = '88.3639';
+      this.latitude = '22.5726';
+
+      var link = environment.apiHost + '/saveVisitEntry';
+      var myData = JSON.stringify({ latitude: this.latitude, longitude: this.longitude, userid: this.pkuserid, dealerid: this.dealerid, locID: this.locID, compid: this.compID, filename_base64: this.base64Image });
+
+      this.http.post(link, myData)
+        .subscribe(data => {
+          console.log(data);
+          let alert = this.alertCtrl.create({
+            title: 'Confirm',
+            subTitle: 'Thank you for Visit',
+            buttons: ['OK']
+          });
+          alert.present();
+
+          this.viewCtrl.dismiss();
+
+
+
+        }, error => {
+          alert(error)
+          console.log(error);
+
+        });
+
+
     });
 
   }

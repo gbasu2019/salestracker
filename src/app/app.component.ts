@@ -45,7 +45,7 @@ export class MyApp {
       { title: 'Visit', component: VisitEntryPage },
       { title: 'GRN', component: GrnPage },
       { title: 'Collection', component: CollectionPage },
-      { title: 'Dealer Leadger', component: AccountledgerPage },
+      // { title: 'Dealer Leadger', component: AccountledgerPage },
       { title: 'Stock Details', component: StockdetailsPage },
       { title: 'Order List', component: OrderListPage },
       { title: 'Report', component: ReportPage },

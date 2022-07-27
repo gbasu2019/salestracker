@@ -1,0 +1,3 @@
+$file = fopen("test.txt","w");
+		echo fwrite($file,"isset".$grnid);
+		fclose($file);

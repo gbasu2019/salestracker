@@ -43,7 +43,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <!-- DataTables -->
   <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <link href="https://www.fontify.me/wf/af83a66be5d910ef21b7df40e1dd588f" rel="stylesheet" type="text/css">
+ <!-- <link href="https://www.fontify.me/wf/af83a66be5d910ef21b7df40e1dd588f" rel="stylesheet" type="text/css">-->
   <style>
 
 	 
